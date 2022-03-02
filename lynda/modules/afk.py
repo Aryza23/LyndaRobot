@@ -19,10 +19,7 @@ AFK_REPLY_GROUP = 8
 @run_async
 def afk(update: Update, _):
     args = update.effective_message.text.split(None, 1)
-    reason = ""
-    if len(args) >= 2:
-        reason = args[1]
-
+    reason = args[1] if len(args) >= 2 else ""
     sql.set_afk(update.effective_user.id, reason)
     update.effective_message.reply_text(
         "{} is away from keyboard !".format(update.effective_user.first_name)
